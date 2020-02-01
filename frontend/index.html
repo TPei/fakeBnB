@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Fewo</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="sticky">
+      <div class="search-wrapper">
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
+          <input class="form-control form-control-lg" type="text" v-model="search" placeholder="Search for accommodation by city, type..."/>
+        </div>
+      </div>
+      <div class="topButtons">
+        <!-- <button @click="showBackendUrl()" class="btn btn-info"><i class="fas fa-store"></i> Set Backend URL</button> -->
+      </div>
+    </div>
+    <div id="backend-url-modal" class="modal fade">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              Backend URL
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </h5>
+          </div>
+          <div class="modal-body">
+            <p>Current Backend URL: {{ backend_url }}</p>
+            <input id="store-url-input" class="form-control" type="text" placeholder="http://localhost:3000" v-model="backend_input">
+          </div>
+          <div class="modal-footer">
+            <button @click="setBackendUrl()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Set Backend URL</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="accommodation-modal" class="modal fade">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              Accommodation Details
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </h5>
+          </div>
+          <div class="modal-body">
+            <h3>Title: {{ accommodation.title }}</h3>
+            <p>City: {{ accommodation.city }}</p>
+            <div v-if="showSpinner">
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+            <div v-else>
+              <p>Country: {{ accommodation.country }}</p>
+              <p>Floor Area: {{ accommodation.floor_area }}</p>
+              <p>Bedrooms: {{ accommodation.bedrooms }}</p>
+              <p>Bathrooms: {{ accommodation.bathrooms }}</p>
+              <p>Min Stay Nights: {{ accommodation.min_stay_nights }}</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="card" @click="itemClicked(accommodation)" v-for="accommodation in filteredList">
+        <p>{{ accommodation.title }}</p>
+        <p class="supersmall"> {{ accommodation.type }} </p>
+        <p class="supersmall">location: {{ accommodation.city }} </p>
+        <p class="smallish">Max guests: {{ accommodation.max_guests }}</p>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="js/accommodation.js"></script>
+  <script src="js/index.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</body>
+</html>
