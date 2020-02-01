@@ -36,13 +36,13 @@ div#app .search-wrapper input::-webkit-input-placeholder {
 }
 div#app .wrapper {
   display: flex;
-  max-width: 900px;
+  max-width: 975px;
   flex-wrap: wrap;
   padding-top: 12px;
 }
 div#app .card {
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
-  width: 200px;
+  width: 300px;
   margin: 12px;
   transition: .15s all ease-in-out;
   text-decoration: none;
