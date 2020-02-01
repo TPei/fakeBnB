@@ -7,4 +7,12 @@ class Accommodation {
     this.city = accommodation.city;
     this.max_guests = accommodation.max_guests;
   }
+
+  setData(accommodation) {
+    this.country = accommodation.country;
+    this.floor_area = accommodation.floor_area;
+    this.bedrooms = accommodation.bedrooms;
+    this.bathrooms = accommodation.bathrooms;
+    this.min_stay_nights = accommodation.min_stay_nights;
+  }
 }

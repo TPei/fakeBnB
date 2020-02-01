@@ -47,13 +47,7 @@ var app = new Vue({
       this.accommodations = accommodations.map(accommodation => new Accommodation(accommodation))
     },
     setAccommodation: function(accommodation, data) {
-      accommodation.country = data.country;
-      accommodation.floor_area = data.floor_area;
-      accommodation.bedrooms = data.bedrooms;
-      accommodation.bathrooms = data.bathrooms;
-      accommodation.min_stay_nights = data.min_stay_nights;
-
-      this.accommodation = accommodation;
+      accommodation.setData(data);
     }
   },
 
