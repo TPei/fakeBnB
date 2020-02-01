@@ -1,6 +1,7 @@
 var app = new Vue({
   el: '#app',
   data: {
+    initialLoadingComplete: false,
     backend_input: '',
     backend_url: "http://localhost:3000",
     accommodation: new Accommodation({ title: '', type: { name: '' }, city: '', max_guests: '' }),
@@ -17,11 +18,8 @@ var app = new Vue({
       $("#accommodation-modal").modal('show');
       if(accommodation.country === undefined) {
         $.getJSON(this.backend_url + '/accommodations/' + accommodation.id, function(data) {
-          setTimeout(function() {
-            console.log("got data: " + data);
-            this.setAccommodation(accommodation, data);
-            this.showSpinner = false;
-          }.bind(this), 1000);
+          this.setAccommodation(accommodation, data);
+          this.showSpinner = false;
         }.bind(this));
       } else {
         this.showSpinner = false;
@@ -40,6 +38,7 @@ var app = new Vue({
       $.ajaxSetup({ cache: false });
       $.getJSON(this.backend_url + '/accommodations/', function(data) {
         this.setAccommodations(data);
+        this.initialLoadingComplete = true;
       }.bind(this));
     },
     setAccommodations: function(accommodations) {
