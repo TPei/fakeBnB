@@ -3,14 +3,14 @@ class AccommodationsController < ApplicationController
 
   # GET /accommodations
   def index
-    @accommodations = Accommodation.all
+    @accommodations = Accommodation.includes(:type, :rating).select(index_fields + [:type_id, :rating_id])
 
-    render json: @accommodations
+    render json: @accommodations, :include => { :type=> { :only => :name } }, only: index_fields
   end
 
   # GET /accommodations/1
   def show
-    render json: @accommodation
+    render json: @accommodation, :include => { :type=> { :only => :name } }
   end
 
   # POST /accommodations
@@ -41,11 +41,15 @@ class AccommodationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_accommodation
-      @accommodation = Accommodation.find(params[:id])
+      @accommodation = Accommodation.includes(:type, :rating).find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def accommodation_params
       params.require(:accommodation).permit(:title, :city, :country, :type_id, :floor_area, :bedrooms, :bathrooms, :min_stay_nights, :max_guests, :rating_id)
+    end
+
+    def index_fields
+      [:id, :title, :city, :max_guests]
     end
 end
